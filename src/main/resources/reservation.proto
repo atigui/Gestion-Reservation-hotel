@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option java_package = "ma.projet.com.gestionreservation2.web.grpc.stubs";
+option java_multiple_files = true;
+
+message Reservation {
+  int64 id = 1;
+  string customerName = 2;
+  string startDate = 3;
+  string endDate = 4;
+  string roomPreference = 5;
+}
+
+message GetAllReservationsRequest {}
+
+message GetAllReservationsResponse {
+  repeated Reservation reservations = 1;
+}
+
+message GetReservationByIdRequest {
+  int64 id = 1;
+}
+
+message GetReservationByIdResponse {
+  Reservation reservation = 1;
+}
+
+message SaveReservationRequest {
+  Reservation reservation = 1;
+}
+
+message SaveReservationResponse {
+  Reservation reservation = 1;
+}
+message UpdateReservationRequest {
+  int64 id = 1;
+  Reservation reservation = 2;
+}
+
+message UpdateReservationResponse {
+  Reservation reservation = 1;
+}
+message DeleteReservationRequest {
+  int64 id = 1;
+}
+
+message DeleteReservationResponse {
+  bool success = 1;
+}
+
+service ReservationService {
+  rpc getAllReservations(GetAllReservationsRequest) returns (GetAllReservationsResponse);
+  rpc getReservationById(GetReservationByIdRequest) returns (GetReservationByIdResponse);
+  rpc saveReservation(SaveReservationRequest) returns (SaveReservationResponse);
+  rpc deleteReservation(DeleteReservationRequest) returns (DeleteReservationResponse);
+  rpc updateReservation(UpdateReservationRequest) returns (UpdateReservationResponse);
+
+}
